@@ -49,12 +49,11 @@ nav ul li a:hover{
         
 <div class="logo_name">
   <img src="image/download.png" alt ="" style="width :50px ; height:50px ;border-radius:15px ; margin-top:5px;" > <br>
-  <div class="logo">
-        <h1 >
-         
-         Scheduler 
+  <div class="logo" style="width :250px;">
+        
+         Praniti: The Guidance
 
-        </h1>
+        
 
 
 

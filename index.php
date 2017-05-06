@@ -74,8 +74,11 @@ echo '<script type="text/javascript">
      {
 
       //encrypt the password
+     // $password = md5($password) ;
       //insert query
       $insert =$mysqli->query("INSERT INTO userdata (first_name , last_name, user_id , email_id , role, pass) VALUES ('$firstname','$lastname','$userid', '$email' , '$role' , '$password')");
+      $rel_ins =$mysqli->query("INSERT INTO guide_rel (uid) VALUES ('$user_id')");
+
       if($insert != TRUE)
       {
         /*$output= "There was a problem - " ;
