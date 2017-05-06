@@ -2,18 +2,18 @@
 
 if (isset($_POST['sub_button'])) {
    //connect to daatabase;
-     $mysqli = NEW  MySQLi('localhost', 'root', 'hmr17@tt' , 'hmr_db') ;
+     $mysqli = NEW  MySQLi('localhost', 'root', '' , 'praniti') ;
      
      $firstname = $mysqli->real_escape_string($_POST['fname']);
      $lastname = $mysqli->real_escape_string($_POST['lname']);
-     $depart = $mysqli->real_escape_string($_POST['department']);
+     $role = $mysqli->real_escape_string($_POST['role']); // role
      $userid = $mysqli->real_escape_string($_POST['id']);
      $password = $mysqli->real_escape_string($_POST['ent_pass']);
      $email = $mysqli->real_escape_string($_POST['ent_email']);
      $repassword = $mysqli->real_escape_string($_POST['re_pass']);
 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-     $query = $mysqli->query("SELECT * FROM sign_up WHERE uid ='$userid' ");
-     if(empty($firstname) OR empty ($lastname) OR empty($depart) OR empty($userid) OR empty($password) OR empty($repassword) OR empty($email))
+     $query = $mysqli->query("SELECT * FROM userdata WHERE user_id='$userid' ");
+     if(empty($firstname) OR empty ($lastname) OR empty($role) OR empty($userid) OR empty($password) OR empty($repassword) OR empty($email))
      {
      /* $output="Please fill all details" ;*/
       
@@ -74,9 +74,8 @@ echo '<script type="text/javascript">
      {
 
       //encrypt the password
-      $password = md5($password) ;
       //insert query
-      $insert =$mysqli->query("INSERT INTO sign_up (fname, lname, department, uid, pswd,email) VALUES ('$firstname','$lastname','$depart','$userid','$password', '$email')");
+      $insert =$mysqli->query("INSERT INTO userdata (first_name , last_name, user_id , email_id , role, pass) VALUES ('$firstname','$lastname','$userid', '$email' , '$role' , '$password')");
       if($insert != TRUE)
       {
         /*$output= "There was a problem - " ;
@@ -110,7 +109,7 @@ echo '<script type="text/javascript">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-  <title>  Scheduler: Login</title>
+  <title>  Praniti: The Guidance</title>
   <link href="image/download.png" rel="icon"> 
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -134,6 +133,23 @@ background-image: url('image/background.jpg');
   -o-background-size: cover;
   background-size: cover;
    }
+
+select{
+  font-size: 22px;
+  display: block;
+  width: 85%;
+  height: 100%;
+  margin-left: 15%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
 footer{
   position:fixed;
   bottom :0;
@@ -184,12 +200,8 @@ footer nav a{
             </div>
           </div>
 
-          <div class="field-wrap">
-            <label>
-              Department<span class="req">*</span>
-            </label>
-            <input type="text" name ="department" required autocomplete="off"/>
-          </div>
+        
+
           <div class="field-wrap">
             <label>
               User Id<span class="req">*</span>
@@ -203,6 +215,20 @@ footer nav a{
             </label>
             <input name="ent_email" type="email" required autocomplete="off"/>
           </div>
+
+  <div class="field-wrap">
+            <label>
+              Role<span class="req">*</span>
+            </label>
+           <select name ="role"> 
+            <option value="Guide">Guide</option>
+            <option value="Learner">Learner</option>
+           </select>
+          </div>
+
+
+
+
 
           <div class="field-wrap">
             <label>

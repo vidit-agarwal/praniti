@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
 <?php
 	if(isset($_POST['login_button']))
 	{
@@ -13,10 +20,11 @@
             }
            else
            {
-           		 $mysqli = NEW  MySQLi('localhost', 'root', 'hmr17@tt' , 'hmr_db') ;
-           		  $userlogin=$mysqli->real_escape_string($userlogin);
-                  $passlogin=$mysqli->real_escape_string($passlogin);
-                  $query=$mysqli->query("SELECT * FROM sign_up WHERE uid='$userlogin' AND pswd =md5('$passlogin')" );
+           		 $mysqli = NEW  MySQLi('localhost', 'root', '' , 'praniti') ;
+           		  //$userlogin=$mysqli->real_escape_string($userlogin);
+                 // $passlogin=$mysqli->real_escape_string($passlogin);
+               $que = "SELECT * FROM userdata WHERE user_id='$userlogin' and pass ='$passlogin'";
+               $query=$mysqli->query($que);
                   if($query->num_rows==0)
                     {
                         echo '<script type="text/javascript">
@@ -42,3 +50,5 @@
 
 
 ?>
+    </body>
+</html>
