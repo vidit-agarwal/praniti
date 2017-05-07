@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if(!isset($_SESSION['userlog']))
@@ -85,26 +85,13 @@ $uid=$_SESSION['userlog'] ;
      												echo " ".$_SESSION['userlog'] ;*/
      												    	if($row1["uid"] == $_SESSION['userlog'])
      												    	{
-     												    		 $coursename=$row1["expertise"] ;
-     												    				//echo $coursename;//."'>'".$row["uid"]."'</option>";
-
-
-
-     												    			
-     												    		}
-     												    	
+     												    		 $coursename=$row1["expertise"] ;	
+     												    		}	
      												    }
-
-     												    $que1 = $mysqli->query("SELECT * FROM fields WHERE fields_value = '$coursename' ") ;
-     												    $result= $que1->fetch_assoc();
-     												    $courseid = $result["field_id"];
+     											 $que1 = $mysqli->query("SELECT * FROM fields WHERE fields_value='$coursename'") ;
+     											$result= $que1->fetch_assoc();
+     											$courseid = $result["field_id"];
      												    //echo $courseid ;
-
-
-
-
-
-
 
 							?>
 							<form action="send.php" method="POST">
