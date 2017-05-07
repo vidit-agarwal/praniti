@@ -2,7 +2,7 @@
 <head>
 	 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Scheduler :About</title>
+	<title> Praniti: The Guidance</title>
 	<link href="image/download.png" rel="icon"> 
 	 <link rel="stylesheet" href="css/style1.css">
 	   <link rel="stylesheet" href="css/style.css">
@@ -90,7 +90,7 @@ About
 </h2></p>
 <span id="span_text"><p>
 <b>
-This project is to design and implement an algorithm to create a semester course time table by assignimg time-slots to a given set of courses to be run for that semester under given constraints.Time table management is a difficult task in any educational institute management system and it is done manually.Goal of this project is to try to automate the process of time table management.Another goal of this project is to try to make it intelligent so that it knows a little about time table based upon user input and help the user in managing the time table.      
+This project is for new bies or people who want to kick start in some new technologies. So, it's been always a point of concern from where to start and how . What and how will they get the resource. Our project will aim to help them by providing a guidance on how to proceed by giving all proper resources and assessing them at particular time.      
 </b>
 </p></span>	
 

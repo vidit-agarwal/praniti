@@ -2,7 +2,7 @@
 <head>
 	 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Scheduler :Contact Us</title>
+	<title> Praniti : The Guidance</title>
 	<link href="image/download.png" rel="icon"> 
 	 <link rel="stylesheet" href="css/style1.css">
 	   <link rel="stylesheet" href="css/style.css">
@@ -90,9 +90,9 @@ For any enquiry please contact:<br><br>
 <br>
 7827009736<br>
 viditvivo@gmail.com<br><br>
-2. <u>Himit Khurana</u>
-<br> 9818410976
-<br>himitkhurana91@gmail.com</b> :      
+2. <u>J S Radhe Shyam</u>
+<br> 8802782944
+<br>jastisriradheshyam@gmail.com</b> :      
 </p></span>	
 
 	</div>

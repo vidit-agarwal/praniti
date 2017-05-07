@@ -28,7 +28,7 @@ $userlog = $_SESSION['userlog'];
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 		<link rel="stylesheet" href="css/main.css" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		
 	</head>
 	<body class ="body_home">
@@ -69,9 +69,9 @@ $userlog = $_SESSION['userlog'];
 
 				<!-- Main -->
 					<div id="main">
-						<div class="inner">
+						<div class="inner" style="height : auto;">
 						
-						<!----Header---->
+						
 							
 							<label for="learning" style="color:pink;">Your Learning Courses  :</label>
 
@@ -83,23 +83,32 @@ $userlog = $_SESSION['userlog'];
 									<table>
 											<tr>
 												<th>Course </th>
+												<th>Guide </th>
 												<th>Status </th>
-												<th>Guide</th>
 											</tr>
 										<?php
 
 								$mysqli = NEW  MySQLi('localhost', 'root', '' , 'praniti') ;
-								
+
 								$que = $mysqli->query("SELECT * FROM learner where uid= '$userlog'   ");
      											 	 
      												    while($row1= $que->fetch_assoc())
      												    {   
      												    	echo "<tr>";
      												    	echo "<td>".$row1["course_taken"]."</td>" ;
-     												    	echo "<td>".$row1["status"]."</td>";
+     												    	
      												    	 $que1 = $mysqli->query("SELECT * FROM course WHERE sno = '".$row1["g_s_no"]."' ") ;
      												    	 $row2 = $que1->fetch_assoc();
      												    	 echo "<td>".$row2["guide_id"]."</td>" ;
+     												    	 //echo "<td>".$row1["status"]."</td>";
+     												    	 if(!empty($row2["guide_id"]))
+     												    	 {
+     												    	 		echo "<td style='color:green; '><b>Pursuing</b></td>";
+     												    	 }
+     												    	 else
+     												    	 {
+     												    	 	echo "<td style='color:red; '><b>No Guide</b></td>";
+     												    	 }
      												    	 echo "</tr>";
 
 															}
@@ -112,16 +121,108 @@ $userlog = $_SESSION['userlog'];
 							?>
 									</table>
 
+</section>
+								
+										<div>
+
+
+							
+							<label for="learning" style="color:pink;">Learning Guidance  :</label>
+
+
+
+
+							<section class="tiles" ng-app="hello" ng-controller="helloController">
+								
+									<table>
+											<tr>
+												<th>Stage 1</th>
+												<th>Stage 2 </th>
+												<th>Stage 3</th>
+												<th>Stage 4</th>
+												<th>Stage 5</th>
+												
+
+												
+											</tr>
+										<?php
+
+								$mysqli = NEW  MySQLi('localhost', 'root', '' , 'praniti') ;
+
+								$query2 = $mysqli->query("SELECT * FROM learner ");
+								while($rows = $query2->fetch_array())
+								{
+									$temp = $rows["g_s_no"];
+									$query3 = $mysqli->query("SELECT * FROM course  ");
+									while($rows1 = $query3->fetch_assoc())
+									{
+										if($temp == $rows1["sno"])
+										{
+											echo "<tr class='link'>";
+											
+											//$_SESSION['file_name']=; 
+     												    	echo "<td><a href='data_file.php' ng-click='postdata()' ng-model='rev_m' class='call'>".$rows1["div_1"]."</a></td>" ;
+     												    	echo "<td><a href='data_file.php' class='call'>".$rows1["div_2"]."</a></td>";
+       												    	 echo "<td><a href='data_file.php' class='call'>".$rows1["div_3"]."</a></td>" ;
+       												    	 echo "<td><a href='data_file.php' class='call'>".$rows1["div_4"]."</a></td>" ;
+       												    	 echo "<td><a href='data_file.php' class='call'>".$rows1["div_5"]."</a></td>" ;
+     												    	 echo "</tr>";
+										}
+									}
+								}
+
+
+     												    	
+     												    
+
+
+
+							?>
+									</table>
+									<a>{{msg}}</a>
+
 								
 									
 								
 								
-							</section>
+							</section>	
+							</div>
+
+
+							
 						</div>
+
+
+
+						
+
+
+
+
 					</div>
 
 				<!-- Footer -->
 					<footer name ="foot">
+						<script>
+        var app = angular.module('hello', []);
+        app.controller('helloController', function ($scope, $http) {
+            $scope.postdata = function () {
+                 var dataform ={
+                    'data' : $scope.rev_m
+                 } ;
+                $http.post('data_file.php',dataform).then(function (response) {
+                        if (response.data)
+                        $scope.msg = "Post Data Submitted Successfully!";
+                        $scope.con = response.data;
+                        }, function (response) {
+                        $scope.msg = "Service not Exists";
+                        $scope.statusval = response.status;
+                        $scope.statustext = response.statusText;
+                        $scope.headers = response.headers();
+                        });
+            };
+        });
+    </script>
 		<nav><a><center>HugeArdor © 2017</center></a></nav>
 	</footer>
 
@@ -133,6 +234,8 @@ $userlog = $_SESSION['userlog'];
 			<script src="js/util.js"></script>
 			
 			<script src="js/main.js"></script>
+
+
 
 	</body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 if(!isset($_SESSION['userlog']))
@@ -17,7 +17,6 @@ else
 $uid=$_SESSION['userlog'] ;
 
 ?>
-
 
 <!DOCTYPE HTML>
 
@@ -85,13 +84,26 @@ $uid=$_SESSION['userlog'] ;
      												echo " ".$_SESSION['userlog'] ;*/
      												    	if($row1["uid"] == $_SESSION['userlog'])
      												    	{
-     												    		 $coursename=$row1["expertise"] ;	
-     												    		}	
+     												    		 $coursename=$row1["expertise"] ;
+     												    				//echo $coursename;//."'>'".$row["uid"]."'</option>";
+
+
+
+     												    			
+     												    		}
+     												    	
      												    }
-     											 $que1 = $mysqli->query("SELECT * FROM fields WHERE fields_value='$coursename'") ;
-     											$result= $que1->fetch_assoc();
-     											$courseid = $result["field_id"];
+
+     												    $que1 = $mysqli->query("SELECT * FROM fields WHERE fields_value = '$coursename' ") ;
+     												    $result= $que1->fetch_assoc();
+     												    $courseid = $result["field_id"];
      												    //echo $courseid ;
+
+
+
+
+
+
 
 							?>
 							<form action="send.php" method="POST">
@@ -108,36 +120,29 @@ $uid=$_SESSION['userlog'] ;
 
 
 
-							<section class="tiles">
+							<section class="tiles" style="margin-left:1%;">
+								<!--<form acion="allot.php" method="POST">-->
 								
-									<article >
-										<label for="users-allot" style="color:blue;">Students matching your Field :</label>
-	
-									<span class="image">
-										<!--<img src="image/add-user.png" alt="" />-->
-										
-										
-
-											<select multiple name="users-allot" style="width : 100% ; height: 100% ; background-color: #eee ;">
-												<?php
+										<label  style="color:blue;">Students matching your Field :</label>
+									
+									
+											<select  multiple name="get_allot" style="width : 100% ; height: auto ; background-color: #eee ;">
+											<?php
 
 												
      											$que = $mysqli->query("SELECT * FROM learner");
      											$match = $mysqli->query("SELECT * FROM guide_data");
 
-     										//	if($que->num_rows>0 || $match->num_rows>0)
-     										//	{
-     												  
+     									  
      												    while($row1= $match->fetch_assoc() )
-     												    {   /*echo $row1["uid"];
-     												echo " ".$_SESSION['userlog'] ;*/
+     												    {  
      												    	if($row1["uid"] == $_SESSION['userlog'])
      												    	{
      												    		 while($row= $que->fetch_assoc())
      												  			  {
-     												    				if($row["course_taken"]==$row1["expertise"])
+     												    				if($row["course_taken"]==$row1["expertise"] /*&& $row["g_s_no"]==0*/)
      												    			{
-     												    				echo "<option value='".$row["uid"]."'>'".$row["uid"]."'</option>";
+     												    				echo "<option value='".$row["uid"]."'>".$row["uid"]."</option>";
      												    			}
      												    		}
      												    	}
@@ -147,61 +152,103 @@ $uid=$_SESSION['userlog'] ;
 
 
 
-     												   
-
-     										//	}
-
-
-/*
-												for($i=1 ; $i<=10 ; $i++)
-												{
-													echo "<option value='apple'>Apple</option>";
-												}
-													while($row= $que->fetch_assoc())
-     												    {
-     												    		if($row["course_taken"]==$row1["expertise"])
-     												    		{
-     												    			echo "<option value='".$row["uid"]."'>'".$row["uid"]."'</option>";
-     												    		}
-     												    }
-
-												*/
-
+     												 
 
 													?>
 
 
 											</select>
-
-
-									</span>
 									
-								</article>
+								<br><br>
+ <!--<input type="submit"  name ="allot"></input>-->
 
-								<article class="style2">
-									<span class="image">
-										<!--<img src="image/add-user.png" alt="" />-->
-											<select multiple name="users-unallot" style="width : 100% ; height: 100% ; background-color: #eee ;">
-												<?php
-
-												for($i=1 ; $i<=10 ; $i++)
-												{
-													echo "<option value='apple'>Apple</option>";
-												}
-
-
-													?>
-
-
-											</select>
-
-
-									</span>
-									
-								</article>
+							<!--</form>-->
 
 								
+								
+								
 							</section>
+							<br>
+								<h2> Data Entry </h2>
+						
+							<form action="guide_line.php" method="POST" style="background:#efefef ;">
+
+								<label style="color:blue;">Select Course:</label><br>
+							<select  multiple name="sno" style="width : 100% ; height: auto ; background-color: #eee ;">
+											<?php
+
+												
+     											$que1 = $mysqli->query("SELECT * FROM course WHERE guide_id='$uid' ");
+     											
+     									  
+     												    while($row1= $que1->fetch_assoc() )
+     												    {  
+
+     												    		$field=$row1["course_id"];
+     												    	$value=$mysqli->query("SELECT * FROM fields WHERE field_id=$field ");
+     												    		$ress = $value->fetch_assoc();
+     												    				echo "<option value='".$row1["sno"]."'>".$ress["fields_value"]."</option>";
+     												    	
+     												    }
+
+
+
+
+
+     												 
+
+													?>
+
+
+											</select>
+											<br>
+											<label style="color:blue;">Select Level :</label><br>
+											<select  multiple name="div" style="width : 100% ; height: auto ; background-color: #eee ;">
+											<?php
+
+												
+     											$que1 = $mysqli->query("SELECT * FROM course WHERE guide_id='$uid' ");
+     											
+     									  
+     												    while($row1= $que1->fetch_assoc() )
+     												    {  
+
+     												    		$field=$row1["div_no"];
+     												    		$i=1;
+     												    	while($i<=$field)
+     												    			{	echo "<option value='".$i."'>".$i."</option>";
+     												    		$i=$i+1 ;
+     												    	}
+     												    	
+     												    }
+
+
+
+
+
+     												 
+
+													?>
+
+
+											</select>
+
+
+<br><br>
+											<input type="submit" name="guide"></input>
+
+
+
+
+
+
+
+							</form>
+
+
+
+
+
 						</div>
 					</div>
 

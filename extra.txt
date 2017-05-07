@@ -1,0 +1,5 @@
+$scope.postdata = function (text_data) {
+            $http.get('text_access.php')
+                 .then(function(response) {
+                 $scope.text_data = response.data;
+             });

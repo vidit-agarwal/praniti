@@ -1,0 +1,24 @@
+<script type="text/javascript">
+ $(".call").click(function(){
+                var $item = $(this).closest("td").text();
+                alert($item);
+                var quote = "'";
+                var item_s = quote.concat($item);
+                var item_s = item_s.concat(quote);
+                $.ajax({
+                    type:"POST",
+                    url:"data_file.php",
+                    data_share :{
+                	shr : item_s,
+                },
+                dataType:"text",
+                success: function(response_del)
+                    {
+                        if(response_del=="success")
+                            {
+                                console.log("success");
+                            }
+                    }
+                });
+            });
+</script>

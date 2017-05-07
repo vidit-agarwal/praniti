@@ -445,9 +445,9 @@ angular.module('myApp', []).controller('namesCtrl', function($scope) {
 <!--<select multiple name="skill" style="width : 100% ; height: 100% ; background-color: #eee ;">
 												<?php
 
-												for($i=1 ; $i<=10 ; $i++)
+											//	for($i=1 ; $i<=10 ; $i++)
 												{
-													echo "<option value='apple'>Apple</option>";
+											//		echo "<option value='apple'>Apple</option>";
 												}
 
 
